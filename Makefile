@@ -5,11 +5,11 @@ LD=gcc
 CFLAGS=-Wall -Werror -g
 LDFLAGS=$(CFLAGS)
 
-TARGETS=sample
+TARGETS=proj1
 
 all: $(TARGETS)
 
-sample: sample.o
+proj1: proj1.o
 	$(CC) $(CFLAGS) -o $@ $< 
 
 %.o: %.c

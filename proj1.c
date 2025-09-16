@@ -1,3 +1,10 @@
+// Name: Thao Nguyen 
+// Case Network ID: ttn60
+// The filename: proj1.c
+// Date created: Sep 12, 2025
+// Description: This program takes a binary file of a certain format and output it as IPv4 addresses. 
+// There are 2 modes: -p or print mode print the addresses in dotted quad format line by line. -s or summary mode shows the counts of total number of IP addresses and the number of private IPs.
+// It is submitted as the first assignment in the course CSDS 325: Computer Networks.
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -37,13 +44,13 @@ void parseargs (int argc, char *argv [])
                 filename = optarg;
                 break;
             default:
-                fprintf (stderr,"error: unknown option -%c\n",opt);
+                fprintf (stderr,"Error: unknown option -%c\n",opt);
                 usage (argv [0]);
         }
     }
     if (cmd_line_flags == 0)
     {
-        fprintf (stderr,"error: Either -p or -s must be specified\n");
+        fprintf (stderr,"Error: No mode specified\n");
         usage (argv [0]);
     }
 }
@@ -54,7 +61,7 @@ void printMode (char * filename)
     FILE * file = fopen(filename, "rb");
 
     if (file == NULL) {
-        fprintf(stderr, "error: could not open file %s\n", filename);
+        fprintf(stderr, "Error: could not open file %s\n", filename);
         exit(1);
     }
     // Read and process the file in print mode
@@ -76,7 +83,7 @@ void summaryMode (char * filename)
     unsigned char buffer[ADDR_LEN];
     FILE * file = fopen(filename, "rb");
     if (file == NULL) {
-        fprintf(stderr, "error: could not open file %s\n", filename);
+        fprintf(stderr, "Error: could not open file %s\n", filename);
         exit(1);
     }
     int total_ips = 0;
@@ -99,14 +106,14 @@ int main (int argc, char *argv [])
     // Check that a filename was provided
     if (filename == NULL)
     {
-        fprintf (stderr,"error: no filename provided\n");
+        fprintf (stderr,"Error: no filename provided\n");
         usage (argv [0]);
     }
 
     // Prevent both options being set
     if (cmd_line_flags == (ARG_PRINT | ARG_SUMMARY))
     {
-        fprintf (stderr,"error: either -p or -s must be specified but not both.\n");
+        fprintf (stderr,"Error: either -p or -s must be specified but not both.\n");
         usage (argv [0]);
     }
 
